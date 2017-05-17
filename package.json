@@ -1,0 +1,33 @@
+{
+  "name": "react-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build",
+    "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 1234"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valerieseer/react-todo.git"
+  },
+  "author": "Valerie Seer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valerieseer/react-todo/issues"
+  },
+  "homepage": "https://github.com/valerieseer/react-todo#readme",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
