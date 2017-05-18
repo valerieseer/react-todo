@@ -10,5 +10,5 @@ const TodoComponent = React.createClass({
 	}
 })
 
-//Add component to html
+//Add todo component to html
 ReactDom.render(<TodoComponent/>, document.getElementById("todo-wrapper"))
