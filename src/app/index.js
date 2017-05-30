@@ -40,4 +40,6 @@ class TodoComponent extends React.Component {
 
 
 //Add todo component to html
-ReactDom.render(<TodoComponent />, document.getElementById("todo-wrapper"))
+ReactDom.render(<TodoComponent />, 
+document.getElementById("todo-wrapper")
+)
