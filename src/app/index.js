@@ -1,45 +1,47 @@
 const React = require("react")
 const ReactDom = require("react-dom")
 
-
-//Todo component
-class TodoComponent extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			items: []
-		}
-		this.handleButtonClick = this.handleButtonClick.bind(this)
-	}
-	handleButtonClick(event) {
-		event.preventDefault();
-		let todoInput = document.getElementsByClassName("todo-input")[0].value;
-		this.setState(function(prevState) {
-			return {
-				items: prevState.items.push(todoInput)
-			}
-		})
-	}
-   	render() {
-   		console.log(this.state)
-   		let list = this.state.items.map(function(element) {
-   			return <li>{element}<button></button></li>
-   		})
+class TodoItem extends React.Component {
+	render() {
 		return (
-			<div className="todo-list">
-				<p>What should I do today:</p>
-				<form onClick={this.handleButtonClick}>
-					<input type="text" className="todo-input"/>
-					<input type="submit" value="Add"/>
-				</form>
-				<ul>{list}</ul>
+			<li className="todo-item">{this.props.item}</li>
+		)
+	}
+}
+
+class TodoItemsContainer extends React.Component {
+	render() {
+		return
+	}
+}
+
+class TodoApp extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			todos: ["wash hair", "eat", "poop", "poop some more"]
+		}
+	}
+
+  render() {
+		let todoItems = this.state.todos;
+		todoItems = todoItems.map((item, index) => {
+			return (
+				<TodoItem item={item} key={index}/>
+			)
+		});
+		return (
+			<div id="todo-list">
+				<p>To Do:</p>
+				<ul>{todoItems}</ul>
 			</div>
 		)
 	}
 }
 
 
+
 //Add todo component to html
-ReactDom.render(<TodoComponent />, 
-document.getElementById("todo-wrapper")
+ReactDom.render(<TodoApp />,
+document.getElementById("todo-container")
 )
