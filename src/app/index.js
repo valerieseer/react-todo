@@ -1,26 +1,41 @@
 const React = require("react")
 const ReactDom = require("react-dom")
 
+/******* TO DO ITEM *******/
 class TodoItem extends React.Component {
+	handleDelete() {
+		this.props.onDelete(this.props.item)
+	}
+
 	render() {
 		return (
-			<li className="todo-item">{this.props.item}</li>
+			<li className="todo-item"><button className="todo-delete" onClick={this.handleDelete}> x </button>{this.props.item}</li>
 		)
 	}
 }
 
-class TodoItemsContainer extends React.Component {
-	render() {
-		return
-	}
-}
-
+/******* TO DO APP *******/
 class TodoApp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todos: ["wash hair", "eat", "poop", "poop some more"]
-		}
+			todos: ["wash hair", "eat", "poop"]
+		};
+		this.onDelete = this.onDelete.bind(this);
+	}
+
+	onDelete(item) {
+		console.log(this.state.todos)
+		let updatedTodos = this.state.todos.filter(function(val, index) {
+			return item !== val;
+		});
+		this.setState({
+			todos: updatedTodos
+		});
+	}
+
+	handleAdd() {
+		console.log("You added me")
 	}
 
   render() {
@@ -31,8 +46,12 @@ class TodoApp extends React.Component {
 			)
 		});
 		return (
-			<div id="todo-list">
+			<div>
 				<p>To Do:</p>
+				<form>
+					<input type="text"/>
+					<input type="button" value="Add" onClick={this.handleAdd} />
+				</form>
 				<ul>{todoItems}</ul>
 			</div>
 		)
@@ -40,8 +59,4 @@ class TodoApp extends React.Component {
 }
 
 
-
-//Add todo component to html
-ReactDom.render(<TodoApp />,
-document.getElementById("todo-container")
-)
+ReactDom.render(<TodoApp />, document.getElementById("todo-container"))
