@@ -1,62 +1,67 @@
 const React = require("react")
 const ReactDom = require("react-dom")
+require("./css/index.css")
 
 /******* TO DO ITEM *******/
 class TodoItem extends React.Component {
-	handleDelete() {
-		this.props.onDelete(this.props.item)
-	}
-
 	render() {
+		function createTodo () {
+			return <li key={todos.key}>{todos.text}</li>
+		}
+
+		let todoItem = this.props.todo
+		let listTodos = todoItem.map(createTodo)
+
 		return (
-			<li className="todo-item"><button className="todo-delete" onClick={this.handleDelete}> x </button>{this.props.item}</li>
+			<ul>
+			 {listTodos}
+		 	</ul>
 		)
 	}
 }
 
+
 /******* TO DO APP *******/
 class TodoApp extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
-			todos: ["wash hair", "eat", "poop"]
+			todos: []
 		};
-		this.onDelete = this.onDelete.bind(this);
 	}
 
-	onDelete(item) {
-		console.log(this.state.todos)
-		let updatedTodos = this.state.todos.filter(function(val, index) {
-			return item !== val;
-		});
+	addTodo(e) {
+		e.preventDefault();
+
+		let todosArray = this.state.todos
+
+		todosArray.push({
+			text: this._inputElement.value,
+			key: Date.now()
+		})
+
 		this.setState({
-			todos: updatedTodos
-		});
-	}
+			todos: todosArray
+		})
 
-	handleAdd() {
-		console.log("You added me")
+		this._inputElement.value = ''
 	}
 
   render() {
-		let todoItems = this.state.todos;
-		todoItems = todoItems.map((item, index) => {
-			return (
-				<TodoItem item={item} key={index}/>
-			)
-		});
+
 		return (
 			<div>
-				<p>To Do:</p>
-				<form>
-					<input type="text"/>
-					<input type="button" value="Add" onClick={this.handleAdd} />
-				</form>
-				<ul>{todoItems}</ul>
+				<div id="todo-input-container">
+					<form onSubmit={this.addTodo}>
+						<input type="text" placeholder="enter task" ref={(a) => this._inputElement = a} required />
+						<button type="submit" value="add">add</button>
+					</form>
+				</div>
+				<TodoItem todo={this.state.todos} />
 			</div>
 		)
 	}
 }
 
 
-ReactDom.render(<TodoApp />, document.getElementById("todo-container"))
+ReactDom.render(<TodoApp />, document.getElementById("todo-app-container"))

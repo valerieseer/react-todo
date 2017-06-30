@@ -1,0 +1,46 @@
+body {
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 14px;
+}
+
+#todo-app-container {
+  width: 40%;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+ul {
+  list-style-type: none;
+  text-align: left;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+form {
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+  border: 1px solid #ddd;
+  padding: 0 8px;
+  height: 25px;
+  width: 35%;
+}
+
+button[type="submit"] {
+  border: none;
+  padding: 0 12px;
+  background-color: #ddd;
+  height: 27px;
+}
+
+li button {
+  margin-right: 8px;
+  padding: 3px 6px;
+  border-radius: 2px;
+  border: none;
+  background-color: #ddd;
+}
