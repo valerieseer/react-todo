@@ -30,31 +30,34 @@ class TodoApp extends React.Component {
 			todos: []
 		};
 		this.addTodo = this.addTodo.bind(this)
+		this.deleteTodo = this.deleteTodo.bind(this)
 	}
 
 	addTodo(e) {
 		e.preventDefault();
 
 		let todoInput = document.getElementsByClassName("todo-input")[0].value;
-		console.log("INPUT: " + todoInput)
- 		this.setState(function(prevState) {
-			return {
- 				todos: prevState.todos.push(todoInput)
- 			}
-		})
+
+ 		this.setState({
+			todos: [...this.state.todos, todoInput]
+		},() => console.log(this.state.todos))
+	}
+
+	deleteTodo(e) {
+		console.log(e)
 	}
 
   render() {
-		console.log(this.state)
-		console.log("STATE: " + this.state.todos)
- 		let todo = this.state.todos.map(function(el) {
- 			return <li><button></button>{el}</li>
+ 		let todo = this.state.todos.map(function(el, index) {
+ 			return (
+				<li><button className="delete-todo" onClick={this.deleteTodo} data-index={index}> &times; </button>{el}</li>
+			)
 		})
-
+//onClick={this.deleteTodo}
 		return (
 			<div>
 				<form onSubmit={this.addTodo}>
-					<input type="text" className="todo-input" placeholder="enter task" ref={(a) => this._inputElement = a} required />
+					<input type="text" className="todo-input" placeholder="enter task" required />
 					<button type="submit" value="add">add</button>
 				</form>
 				<ul>{todo}</ul>
