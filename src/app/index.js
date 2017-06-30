@@ -3,22 +3,23 @@ const ReactDom = require("react-dom")
 require("./css/index.css")
 
 /******* TO DO ITEM *******/
-class TodoItem extends React.Component {
-	render() {
-		function createTodo () {
-			return <li key={todos.key}>{todos.text}</li>
-		}
-
-		let todoItem = this.props.todo
-		let listTodos = todoItem.map(createTodo)
-
-		return (
-			<ul>
-			 {listTodos}
-		 	</ul>
-		)
-	}
-}
+// class TodoItems extends React.Component {
+// 	render() {
+// 		let todoItem = this.props.todo
+//
+// 		function createTodo () {
+// 			return <li key={todos.key}>{todos.text}</li>
+// 		}
+//
+// 		let listTodos = todoItem.map(createTodo)
+//
+// 		return (
+// 			<ul>
+// 			 {listTodos}
+// 		 	</ul>
+// 		)
+// 	}
+// }
 
 
 /******* TO DO APP *******/
@@ -28,36 +29,34 @@ class TodoApp extends React.Component {
 		this.state = {
 			todos: []
 		};
+		this.addTodo = this.addTodo.bind(this)
 	}
 
 	addTodo(e) {
 		e.preventDefault();
 
-		let todosArray = this.state.todos
-
-		todosArray.push({
-			text: this._inputElement.value,
-			key: Date.now()
+		let todoInput = document.getElementsByClassName("todo-input")[0].value;
+		console.log(todoInput)
+ 		this.setState(function(prevState) {
+			return {
+ 				todos: prevState.todos.push(todoInput)
+ 			}
 		})
-
-		this.setState({
-			todos: todosArray
-		})
-
-		this._inputElement.value = ''
 	}
 
   render() {
+		console.log(this.state)
+ 		let todo = this.state.todos.map(function(el) {
+ 			return <li><button></button>{el}</li>
+		})
 
 		return (
 			<div>
-				<div id="todo-input-container">
-					<form onSubmit={this.addTodo}>
-						<input type="text" placeholder="enter task" ref={(a) => this._inputElement = a} required />
-						<button type="submit" value="add">add</button>
-					</form>
-				</div>
-				<TodoItem todo={this.state.todos} />
+				<form onSubmit={this.addTodo}>
+					<input type="text" className="todo-input" placeholder="enter task" ref={(a) => this._inputElement = a} required />
+					<button type="submit" value="add">add</button>
+				</form>
+				<ul>{todo}</ul>
 			</div>
 		)
 	}
