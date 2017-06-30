@@ -36,7 +36,7 @@ class TodoApp extends React.Component {
 		e.preventDefault();
 
 		let todoInput = document.getElementsByClassName("todo-input")[0].value;
-		console.log(todoInput)
+		console.log("INPUT: " + todoInput)
  		this.setState(function(prevState) {
 			return {
  				todos: prevState.todos.push(todoInput)
@@ -46,6 +46,7 @@ class TodoApp extends React.Component {
 
   render() {
 		console.log(this.state)
+		console.log("STATE: " + this.state.todos)
  		let todo = this.state.todos.map(function(el) {
  			return <li><button></button>{el}</li>
 		})
